@@ -1,14 +1,16 @@
 const EmployeeBloodInformation = require("../models/employeeBloodInvestigationInformation");
 const CheckupData = require("../models/checkupData");
+const { ObjectId } = require("mongodb");
 
 exports.addEmpBloodInformation = async (req, res) => {
   try {
     const data = req.body;
     console.log(data);
 
-    const { checkupDataId } = data.data;
+    const { checkupDataId } = req.body;
+    const empID = new ObjectId(checkupDataId);
 
-    const newBloodInformation = new EmployeeBloodInformation(data);
+    const newBloodInformation = new EmployeeBloodInformation(checkupDataId);
 
     newBloodInformation
       .save()
@@ -25,7 +27,7 @@ exports.addEmpBloodInformation = async (req, res) => {
     const newid = newBloodInformation._id;
 
     await CheckupData.findByIdAndUpdate(
-      { _id: checkupDataId },
+      { _id: empID },
 
       { $set: { "employeeReports.employeeBloodInvestigationDetailsId": newid } }
     );
