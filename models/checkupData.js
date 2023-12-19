@@ -16,6 +16,15 @@ const checkupDataSchema = new mongoose.Schema({
         type: String,
     },
 
+    location:{
+        type: String
+    },
+
+    employeeContactDetailsId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "EmployeeContactDetails",
+      },
+      
     companyId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Company",

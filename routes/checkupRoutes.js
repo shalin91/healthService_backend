@@ -1,13 +1,23 @@
-const express = require('express');
-const { addCheckupType , getCheckupType } = require("../controllers/checkupTypeCtrl");
-const { addCheckupName } =  require( "../controllers/checkupMasterCtrl" );
-const {addCheckupData} = require("../controllers/checkupData")
+const express = require("express");
+const {
+  addCheckupType,
+  getCheckupType,
+} = require("../controllers/checkupTypeCtrl");
+const {
+  addCheckupName,
+  getCheckupNames,
+} = require("../controllers/checkupMasterCtrl");
+const {
+  addCheckupData,
+  getFilteredCheckupData,
+} = require("../controllers/checkupData");
 const router = express.Router();
 
-router.post("/add-checkup-type",addCheckupType);
-router.post("/add-checkup-name",addCheckupName)
-router.post("/add-checkup-data",addCheckupData)
-router.get("/get-all-checkup-type",getCheckupType)
-
+router.post("/add-checkup-type", addCheckupType);
+router.post("/add-checkup-name", addCheckupName);
+router.post("/add-checkup-data", addCheckupData);
+router.get("/get-all-checkup-type", getCheckupType);
+router.get("/get-all-checkup-data", getFilteredCheckupData);
+router.get("/get-checkup-name", getCheckupNames);
 
 module.exports = router;
