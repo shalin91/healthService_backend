@@ -5,10 +5,6 @@ exports.addCheckupData = async (req, res) => {
   try {
     const data = req.body;
 
-    console.log(data);
-
-
-    // const { checkupName } = req.body;
     const {
       employeeId,
       companyId,
@@ -18,50 +14,27 @@ exports.addCheckupData = async (req, res) => {
       employeeContactDetailsId,
     } = req.body;
 
-    // const isPresent = await CheckupData.findOne({ checkupName });
+    // Find the existing record based on employeeId
+    const existingRecord = await CheckupData.findOneAndUpdate(
+      { employeeId: new ObjectId(employeeId) },
+      {
+        ...data,
+        companyId: new ObjectId(companyId),
+        checkupNameId: new ObjectId(checkupNameId),
+        checkupTypeId: new ObjectId(checkupTypeId),
+        employeeContactDetailsId: new ObjectId(employeeContactDetailsId),
+        location: location,
+      },
+      { new: true, upsert: true }
+    );
 
-    // if (isPresent) {
-
-    //     return res.status(201).json({ message: "alredy registered" });
-
-    // }
-
-
-    const newCheckUpData = new CheckupData({
-      ...data,
-      companyId: new ObjectId(companyId),
-      checkupNameId: new ObjectId(checkupNameId),
-      checkupTypeId: new ObjectId(checkupTypeId),
-      employeeId: new ObjectId(employeeId),
-      employeeId: new ObjectId(employeeId),
-      employeeContactDetailsId: new ObjectId(employeeContactDetailsId),
-      location: location,
-    });
-
-    console.log(newCheckUpData);
-
-    newCheckUpData
-
-      .save()
-
-      .then(() => {
-        res.status(201).json({ data: newCheckUpData });
-      })
-      .catch((err) => {
-        console.error("Error saving checkup data", err);
-
-        res
-          .status(500)
-          .json({ error: "Error saving checkup data", details: err });
-      });
+    res.status(200).json({ data: existingRecord });
   } catch (error) {
     console.error("Internal server error:", error);
-
-
     res.status(500).json({ error: "Internal server error" });
   }
-
 };
+
 
 exports.updateCheckupData = async (req, res) => {
   try {

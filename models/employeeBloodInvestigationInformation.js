@@ -112,46 +112,44 @@ const employeeBloodInformationSchema = new mongoose.Schema({
     type: String,
   },
 
-  urineRAndM: {
-    proein: {
-      type: String,
-    },
+  proein: {
+    type: String,
+  },
 
-    glucose: {
-      type: String,
-    },
+  glucose: {
+    type: String,
+  },
 
-    ketone: {
-      type: String,
-    },
+  ketone: {
+    type: String,
+  },
 
-    bileSalts: {
-      type: String,
-    },
+  bileSalts: {
+    type: String,
+  },
 
-    bilePigments: {
-      type: String,
-    },
+  bilePigments: {
+    type: String,
+  },
 
-    pusCells: {
-      type: String,
-    },
+  pusCells: {
+    type: String,
+  },
 
-    redCells: {
-      type: String,
-    },
+  redCells: {
+    type: String,
+  },
 
-    epiCells: {
-      type: String,
-    },
+  epiCells: {
+    type: String,
+  },
 
-    cast: {
-      type: String,
-    },
+  cast: {
+    type: String,
+  },
 
-    crystals: {
-      type: String,
-    },
+  crystals: {
+    type: String,
   },
 
   //other changes remaining

@@ -8,14 +8,18 @@ exports.addEmpBloodInformation = async (req, res) => {
     console.log(data);
 
     const { checkupDataId } = req.body;
+    console.log(req.body);
     const empID = new ObjectId(checkupDataId);
 
-    const newBloodInformation = new EmployeeBloodInformation(checkupDataId);
+    const newBloodInformation = new EmployeeBloodInformation(data);
 
     newBloodInformation
       .save()
       .then(() => {
-        res.status(201).json({ message: "empy blood info added successfully" });
+        return res.status(201).send({
+          data: newBloodInformation,
+          message: "empy blood info added successfully",
+        });
       })
       .catch((err) => {
         console.error("Error saving blood info :", err);

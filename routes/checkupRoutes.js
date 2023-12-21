@@ -12,6 +12,10 @@ const {
   getFilteredCheckupData,
   getCheckupDataById,
 } = require("../controllers/checkupData");
+
+const {
+  addCheckupName1, getCheckupName,
+}=require("../controllers/checkupNameCtrl")
 const router = express.Router();
 
 router.post("/add-checkup-type", addCheckupType);
@@ -21,4 +25,7 @@ router.get("/get-all-checkup-type", getCheckupType);
 router.get("/get-all-checkup-data", getFilteredCheckupData);
 router.get("/get-checkup-name", getCheckupNames);
 router.get("/get-checkupdata/:id", getCheckupDataById);
+//vaishal...
+router.post("/add-checkupname-master",addCheckupName1);
+router.get("/get-checkupname-master",getCheckupName)
 module.exports = router;
