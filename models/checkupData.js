@@ -79,7 +79,12 @@ const checkupDataSchema = new mongoose.Schema({
             default:null
         },
 
-    }
+    },
+    
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 
     //other changes remaining
 });

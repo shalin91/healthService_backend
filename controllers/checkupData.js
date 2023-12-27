@@ -88,6 +88,8 @@ exports.getFilteredCheckupData = async (req, res) => {
       endDate,
     } = req.query;
 
+   
+
     const filters = {};
 
     if (companyId) filters.companyId = new ObjectId(companyId);
@@ -96,9 +98,22 @@ exports.getFilteredCheckupData = async (req, res) => {
     if (checkupTypeId) filters.checkupTypeId = new ObjectId(checkupTypeId);
 
     if (startDate && endDate) {
+      const datePattern = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+
+      const [,  startMonth, startDay ,startYear] = startDate.match(datePattern);
+      const [,  endMonth, endDay,endYear] = endDate.match(datePattern);
+  
+    
+      const start = new Date(`${startYear}-${startMonth}-${startDay}`);
+      const end = new Date(`${endYear}-${endMonth}-${endDay}`);
+  
+      end.setHours(23, 59, 59, 999);
+  
+      console.log(start)
+      console.log(end)
       filters.createdAt = {
-        $gte: new Date(startDate),
-        $lte: new Date(endDate),
+        $gte: start,
+        $lte: end,
       };
     }
 
